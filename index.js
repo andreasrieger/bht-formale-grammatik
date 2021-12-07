@@ -45,12 +45,46 @@
 // Ich verstehe zwar die Regel, habe aber keine Ahnung, wie man das in ausführbaren code 
 // giesst und suche nach einer Anregung.
 
-const rules = {
+const cgRules = {
     start: "$Z | $B | $A ",
     A: "($B)",
     B: "$Z$O$start",
     Z: "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
     O: "+ | - | * | /"
-    };
+};
+
+const
+    start = ['Z', 'B', 'A'],
+    // A = runA(),
+    // B = runB(),
+    Z = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    O = ['+', '-', '*', '/']
+    ;
+
+const eL = 1;
+
+Array.min = (array) => {
+    return Math.min.apply(Math, array);
+};
+
+Array.max = (array) => {
+    return Math.max.apply(Math, array);
+};
+
+const randomValue = (arr) => {
+    const min = Math.ceil(Array.min(arr));
+    const max = Math.floor(Array.max(arr));
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const express = (arr) => {
+    console.log(randomValue(arr))
+};
 
 
+const runA = () => { };
+const runB = () => { };
+
+(() => {
+    if (eL == 1) console.log(randomValue(Z))
+})();
