@@ -46,45 +46,116 @@
 // giesst und suche nach einer Anregung.
 
 const cgRules = {
-    start: "$Z | $B | $A ",
-    A: "($B)",
-    B: "$Z$O$start",
+    S: "$Z | $B | $C ",
+    B: "($C)",
+    C: "$Z$O$S",
     Z: "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
     O: "+ | - | * | /"
 };
 
 const
-    start = ['Z', 'B', 'A'],
-    // A = runA(),
-    // B = runB(),
     Z = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     O = ['+', '-', '*', '/']
     ;
 
-const eL = 1;
+const eL = 25; // expression length
+let counter = 0;
 
+
+/**
+ * Helper method to return the smallest value of an array
+ * 
+ * @param {*} array 
+ * @returns 
+ */
 Array.min = (array) => {
     return Math.min.apply(Math, array);
 };
 
+
+/**
+ * Helper method to return the largest value of an array
+ * 
+ * @param {*} array 
+ * @returns 
+ */
 Array.max = (array) => {
     return Math.max.apply(Math, array);
 };
 
+
+/**
+ * Returning a random operator from $O or a random digit from $Z 
+ * 
+ * @param {*} arr 
+ * @returns 
+ */
 const randomValue = (arr) => {
-    const min = Math.ceil(Array.min(arr));
-    const max = Math.floor(Array.max(arr));
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    if (arr == O) {
+        const min = 0;
+        const max = arr.length - 1;
+        return O[Math.floor(Math.random() * (max - min + 1)) + min];
+    } else {
+        const min = Math.ceil(Array.min(arr));
+        const max = Math.floor(Array.max(arr));
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 };
 
-const express = (arr) => {
-    console.log(randomValue(arr))
+
+/**
+ * Returning an expression consisting of a single digit or 
+ * a combination of operands and operators
+ * 
+ * @param {*} expression 
+ * @returns 
+ */
+const A = (expression) => {
+    while (counter < eL - 1) {
+        counter += 1;
+
+        /**
+         * recursion without calling method C
+         */
+        /*
+        if (counter + 1 < eL) {
+            expression = A(B(expression + randomValue(O) + randomValue(Z)));
+        } else {
+            expression = A(expression + randomValue(O) + randomValue(Z));
+        }
+        */
+
+        /**
+         * calling method C without recursion
+         */
+        expression = A((counter + 1 < eL) ? B(C(expression)) : C(expression));
+    }
+    return expression;
 };
 
 
-const runA = () => { };
-const runB = () => { };
+/**
+ * Returning a given expression in round brackets / parantheses
+ * 
+ * @param {*} expression 
+ * @returns 
+ */
+const B = (expression) => {
+    return `(${expression})`;
+}
 
-(() => {
-    if (eL == 1) console.log(randomValue(Z))
-})();
+/**
+ * Returning a given expression expanded by an additional operator and operand 
+ * 
+ * @param {*} expression 
+ * @returns 
+ */
+const C = (expression) => {
+    return expression + randomValue(O) + randomValue(Z);
+};
+
+
+/**
+ * Calling the A method and logging its result
+ */
+console.log(A(randomValue(Z)))
