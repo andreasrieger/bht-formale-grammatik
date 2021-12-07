@@ -58,7 +58,7 @@ const
     O = ['+', '-', '*', '/']
     ;
 
-const eL = 25; // expression length
+const eL = 5; // expression length
 let counter = 0;
 
 
