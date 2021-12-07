@@ -41,7 +41,7 @@
  */
 
 // Das hier hat eine Kommilitonin im Forum gepostet.
-// Das sind aber "nur" Strings - nichts was man sinnvoll Code verwenden könnte (my 2 ¢).
+// Das sind aber "nur" Strings - nichts was man sinnvoll im Code verwenden könnte (my 2 ¢).
 // Ich verstehe zwar die Regel, habe aber keine Ahnung, wie man das in ausführbaren code 
 // giesst und suche nach einer Anregung.
 
