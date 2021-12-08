@@ -1,4 +1,9 @@
 /**
+ * Lösung zur unten gestellten Aufgabe
+ * 
+ * @author Andreas Rieger, s82456@bht-berlin.de
+ * Date: 2021-12-08
+ * 
  * Aufgabenstellung:  
  * 
  * Erzeugen Sie mit Hilfe eine Grammatik zufällige arithmetische Ausdrücke
@@ -40,17 +45,11 @@
  * 
  */
 
-// Das hier hat eine Kommilitonin im Forum gepostet.
-// Das sind aber "nur" Strings - nichts was man sinnvoll im Code verwenden könnte (my 2 ¢).
-// Ich verstehe zwar die Regel, habe aber keine Ahnung, wie man das in ausführbaren code 
-// giesst und suche nach einer Anregung.
-
-const cgRules = {
-    S: "$Z | $B | $C ",
+const rules = {
+    S: "$Z | $B | $C | $D ",
     B: "($C)",
     C: "$Z$O$S",
-    Z: "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
-    O: "+ | - | * | /"
+    D: "$S$O$Z"
 };
 
 const
@@ -66,7 +65,7 @@ let counter = 0;
  * Helper method to return the smallest value of an array
  * 
  * @param {*} array 
- * @returns 
+ * @returns the smallest value of an array
  */
 Array.min = (array) => {
     return Math.min.apply(Math, array);
@@ -77,7 +76,7 @@ Array.min = (array) => {
  * Helper method to return the largest value of an array
  * 
  * @param {*} array 
- * @returns 
+ * @returns the largest value of an array
  */
 Array.max = (array) => {
     return Math.max.apply(Math, array);
@@ -85,21 +84,26 @@ Array.max = (array) => {
 
 
 /**
- * Returning a random operator from $O or a random digit from $Z 
+ * This method is returning a random digit from $Z
  * 
- * @param {*} arr 
- * @returns 
+ * @returns a random digit from $Z array
  */
-const randomValue = (arr) => {
-    if (arr == O) {
-        const min = 0;
-        const max = arr.length - 1;
-        return O[Math.floor(Math.random() * (max - min + 1)) + min];
-    } else {
-        const min = Math.ceil(Array.min(arr));
-        const max = Math.floor(Array.max(arr));
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+const randomDigit = () => {
+    const min = Math.ceil(Array.min(Z));
+    const max = Math.floor(Array.max(Z));
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
+/**
+ * This method is returning a random operator from $O
+ * 
+ * @returns a random operator from $O array
+ */
+const randomOperator = () => {
+    const min = 0;
+    const max = O.length - 1;
+    return O[Math.floor(Math.random() * (max - min + 1)) + min];
 };
 
 
@@ -108,27 +112,14 @@ const randomValue = (arr) => {
  * a combination of operands and operators
  * 
  * @param {*} expression 
- * @returns 
+ * @returns the arithmetical expression with the defined length
  */
 const A = (expression) => {
     while (counter < eL - 1) {
         counter += 1;
-
-        /**
-         * recursion without calling method C
-         */
-        /*
-        if (counter + 1 < eL) {
-            expression = A(B(expression + randomValue(O) + randomValue(Z)));
-        } else {
-            expression = A(expression + randomValue(O) + randomValue(Z));
-        }
-        */
-
-        /**
-         * calling method C without recursion
-         */
-        expression = A((counter + 1 < eL) ? B(C(expression)) : C(expression));
+        if (Math.random() < 0.5) {
+            expression = A((counter + 1 < eL) ? B(C(expression)) : C(expression));
+        } else expression = A((counter + 1 < eL) ? B(D(expression)) : D(expression));
     }
     return expression;
 };
@@ -138,24 +129,36 @@ const A = (expression) => {
  * Returning a given expression in round brackets / parantheses
  * 
  * @param {*} expression 
- * @returns 
+ * @returns a given expression in round brackets / parantheses
  */
 const B = (expression) => {
     return `(${expression})`;
 }
 
 /**
- * Returning a given expression expanded by an additional operator and operand 
+ * Returning a given expression expanded by an additional 
+ * operator and operand on the right side
  * 
  * @param {*} expression 
- * @returns 
+ * @returns a new expression
  */
 const C = (expression) => {
-    return expression + randomValue(O) + randomValue(Z);
+    return expression + randomOperator() + randomDigit();
+};
+
+
+/**
+ * Returning a given expression expanded by an additional 
+ * operator and operand on the left side
+ * @param {*} expression 
+ * @returns a new expression
+ */
+const D = (expression) => {
+    return randomDigit() + randomOperator() + expression;
 };
 
 
 /**
  * Calling the A method and logging its result
  */
-console.log(A(randomValue(Z)))
+console.log(A(randomDigit()))
