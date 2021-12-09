@@ -54,10 +54,11 @@ const rules = {
 
 const
     Z = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    O = ['+', '-', '*', '/']
+    O = ['+', '-', '*', '/'],
+    T = [],
+    eL = 5 // expression length
     ;
 
-const eL = 5; // expression length
 let counter = 0;
 
 
@@ -115,13 +116,12 @@ const randomOperator = () => {
  * @returns the arithmetical expression with the defined length
  */
 const A = (expression) => {
+    T.push(expression);
     while (counter < eL - 1) {
+        // console.log(counter)
         counter += 1;
-        if (Math.random() < 0.5) {
-            expression = A((counter + 1 < eL) ? B(C(expression)) : C(expression));
-        } else expression = A((counter + 1 < eL) ? B(D(expression)) : D(expression));
+        A((counter + 1 < eL) ? B(C(expression)) : C(expression));
     }
-    return expression;
 };
 
 
@@ -134,6 +134,7 @@ const A = (expression) => {
 const B = (expression) => {
     return `(${expression})`;
 }
+
 
 /**
  * Returning a given expression expanded by an additional 
@@ -161,4 +162,25 @@ const D = (expression) => {
 /**
  * Calling the A method and logging its result
  */
-console.log(A(randomDigit()))
+// console.log(A(randomDigit()))
+A(randomDigit())
+
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    // console.log("DOM fully loaded and parsed");
+    // console.log(A(randomDigit()))
+    console.log(T)
+
+    let i = -1;
+
+    document.getElementById("prevButton").addEventListener("click", () => {
+
+    })
+
+    document.getElementById("nextButton").addEventListener("click", () => {
+        if (i + 1 < T.length) {
+            i++;
+            console.log(T[i])
+        }
+    })
+});
