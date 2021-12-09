@@ -47,7 +47,7 @@
 
 const rules = {
     S: "$Z | $B | $C | $D ",
-    B: "($C)",
+    B: "($C) | ($D)",
     C: "$Z$O$S",
     D: "$S$O$Z"
 };
