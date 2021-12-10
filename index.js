@@ -56,10 +56,11 @@ const
     Z = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     O = ['+', '-', '*', '/'],
     T = [],
-    eL = 5 // expression length
+    eL = 10 // expression length
     ;
 
 let counter = 0;
+let prevExpression = 0;
 
 
 /**
@@ -116,11 +117,14 @@ const randomOperator = () => {
  * @returns the arithmetical expression with the defined length
  */
 const A = (expression) => {
-    T.push(expression);
-    while (counter < eL - 1) {
-        // console.log(counter)
+    if (counter == 0) expression = { state: 'Z', term: expression };
+    T.push(expression)
+    // console.log(expression)
+    while (counter + 1 < eL) {
+        prevExpression = expression.term;
         counter += 1;
-        A((counter + 1 < eL) ? B(C(expression)) : C(expression));
+        if (Math.random() < 0.5) A((counter < 2) ? C(prevExpression) : C(B(prevExpression)));
+        else A((counter < 2) ? D(prevExpression) : D(B(prevExpression)));
     }
 };
 
@@ -132,8 +136,10 @@ const A = (expression) => {
  * @returns a given expression in round brackets / parantheses
  */
 const B = (expression) => {
-    return `(${expression})`;
-}
+    expression = `(${expression})`;
+    T.push({ state: 'B', term: expression })
+    return expression;
+};
 
 
 /**
@@ -144,7 +150,8 @@ const B = (expression) => {
  * @returns a new expression
  */
 const C = (expression) => {
-    return expression + randomOperator() + randomDigit();
+    expression = expression + randomOperator() + randomDigit();
+    return { state: 'C', term: expression };
 };
 
 
@@ -155,7 +162,8 @@ const C = (expression) => {
  * @returns a new expression
  */
 const D = (expression) => {
-    return randomDigit() + randomOperator() + expression;
+    expression = randomDigit() + randomOperator() + expression;
+    return { state: 'D', term: expression };
 };
 
 
@@ -164,17 +172,20 @@ const D = (expression) => {
  */
 // console.log(A(randomDigit()))
 A(randomDigit())
+console.log(T)
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
     // console.log("DOM fully loaded and parsed");
-    // console.log(A(randomDigit()))
-    console.log(T)
+    // console.log(T)
 
     let i = -1;
 
     document.getElementById("prevButton").addEventListener("click", () => {
-
+        if (i > 0) {
+            i--;
+            console.log(T[i])
+        }
     })
 
     document.getElementById("nextButton").addEventListener("click", () => {
