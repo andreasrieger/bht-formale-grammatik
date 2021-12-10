@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (i > 0) {
             i--;
             console.log(T[i])
+            document.getElementById("output").innerText = T[i].term;
         }
     })
 
@@ -192,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (i + 1 < T.length) {
             i++;
             console.log(T[i])
+            document.getElementById("output").innerText = T[i].term;
         }
     })
 });
