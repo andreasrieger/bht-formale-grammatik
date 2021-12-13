@@ -29,60 +29,29 @@
         <div class="row mb-3">
             <div class="col-2"></div>
             <div class="col-8 mb-3">
-                <h1 class="h3">Realisierung eines deterministischen endlichen Automaten (DEA)</h1>
-                <p>Autor: Andreas Rieger<br />Datum: 21.11.2021</p>
+                <h1 class="h3">Realisierung einer Webanwendung zur Ausgabe von zufälligen arithmetischen Ausdrücken</h1>
+                <p>Autor: Andreas Rieger<br />Datum: 13.12.2021</p>
                 <h2 class="h4">Aufgabenstellung</h2>
-                <p>Simulation und Visualisierung der <a
-                        href="https://willamette.edu/~gorr/classes/cs449/reber.html#top">Reber Grammar (RG)</a> als
-                    Deterministischen Endlichen Automaten
-                    (DEA).</p>
+                <p>Erzeugen Sie mit Hilfe eine Grammatik zufällige arithmetische Ausdrücke über einstelligen natürlichen
+                    Zahlen mit den Operanden "+,-,*,/" und beliebig geschachtelten runden Klammeren, z.B.: 2*(3*(4+7)-9)
+                    oder 9+2 oder (3) oder nur 7 sind gültig,
+                </p>
+                <h2 class="h4">Visualisierung</h2>
+                <p>Die Generierung der Ausdrücke mittels der Grammatik wird schrittweise angezeigt. Dabei soll (z.B.
+                    durch farbliche Hervorhebung) ersichtlich sein welche Regel angewandt wird, und was sich dadurch im
+                    bisher erzeugten Ausdruck verändert hat (vorher -> nachher). Sie können dabei mit HTML-Text [und CSS] als Darstellung arbeiten.</p>
                 <h2 class="h4">Technische Dokumentation</h2>
-                <p>Die Anwendung basiert auf HTML, CSS, Javascript und SVG. Diese wurden
-                    ohne Verwendung von Frameworks implementiert.</p>
-                <p>Zur Visualisierung der Oberfl&auml;che wurde au&szlig;erdem das Framework
+                <p>Die Anwendung basiert auf HTML, CSS und Javascript.</p>
+                <p>Zur Visualisierung der Oberfl&auml;che wurde das Framework
                     <a href="https://getbootstrap.com/">Bootstrap v5.1</a> verwendet. Bootstrap liefert eine
                     einheitliche, gut strukturierte und responsive
                     Benutzeroberfl&auml;che, die sich verschiedenen Endger&auml;ten anpassen l&auml;sst. Außerdem hält
                     das Framework viele vordefinierte und ansprechend gestaltete Komponenten zur Interaktion bereit.
                 </p>
                 <h2 class="h4">Fachliche Dokumentation</h2>
-                <p>Der Automat wurde als Klasse mit Javascript realisiert. Darin enthalten
-                    ist ein Objekt, welches die Ausgangs- und Folgezust&auml;nde des Automaten definiert. Eingabe,
-                    Verarbeitung und Ausgabe der Zeichenfolge erfolgen nach einer getrennten Logik. Hierbei wurde
-                    versucht, dem
-                    Muster des Model-View-Controller (MVC) zu folgen. Bei der Umsetzung wurde besonders auf eine
-                    einfache und selbsterklärende Gestaltung geachtet.</p>
-                <h2 class="h4">Programmablauf</h2>
-                <h3 class="h5">Eingabe</h3>
-                <p>Beim Starten der Anwendung besteht die M&ouml;glichkeit zur Wahl
-                    zwischen:</p>
-                <ul>
-                    <li>der direkten Eingabe einer Zeichenfolge, </li>
-                    <li>der zuf&auml;lligen Auswahl einer g&uuml;ltigen
-                        Zeichenfolge oder</li>
-                    <li>der Erstellung einer zuf&auml;lligen Zeichenfolge
-                        unter Verwendung der im Alphabet vorgegebenen Zeichen.</li>
-                </ul>
-                <p>Bei der Eingabe einer individuellen Zeichenfolge erfolgt eine
-                    skript-gest&uuml;tzte &Uuml;berpr&uuml;fung nach Semantik und L&auml;nge. Der Automat kann erst nach
-                    Eingabe einer
-                    nach dem Alphabet g&uuml;ltigen, ausreichend langen Zeichenfolge (mindestens 5 Zeichen) gestartet
-                    werden.</p>
-                <h3 class="h5">Datenverarbeitung</h3>
-                <p>Zun&auml;chst erfolgt die Erstellung eines Objekts durch die
-                    Instanziierung der Automatenklasse. </p>
-                <p>Der Automat durchl&auml;uft die &uuml;bergebene Zeichenfolge und
-                    ermittelt f&uuml;r jedes Zeichen den jeweils g&uuml;ltigen Folgezustand. Wenn kein Folgezustand
-                    existiert, wird die
-                    Ausf&uuml;hrung des Programms abgebrochen und das Ergebnis als Objekt an den Aufrufer
-                    zur&uuml;ckgegeben.</p>
-                <h3 class="h5">Ausgabe</h3>
-                <p>Die (Un-)G&uuml;ltigkeit der dem Automaten &uuml;bergebenen Zeichenfolge
-                    wird als Warn- bzw. Erfolgsmeldung angezeigt.</p>
-                <p>Im n&auml;chsten Schritt werden die Ergebnisse als Graph und als Werte in
-                    der Zustandstabelle ausgegeben. Hierbei kann zwischen sofortiger oder sequenzieller Ausgabe
-                    gew&auml;hlt werden. Richtige und falsche Ergebnisse werden dabei farblich hervorgehoben.</p>
-                <p></p>
+                <p>Per Formulareingabe - hier in Form eines Range-Sliders - wird im Hintergrund zunächst eine zufällige Zeichenfolge erzeugt und in einem Array aus Objekten gespeichert. </p>
+                <p>Anschließend wird per Eingabesteuerung durch das erstellte Array iteriert und die Werte des jeweiligen Objektes werden ausgegebenen. Die Steuerung bzw. Ausgabe erfolgt entweder schrittweise manuell oder automatisch in einem ausgewählten zeitlichen Intervall.</p>
+                <p>Die Ausgabe kann jederzeit durch Betätigung des Reset-Knopfes gestoppt werden.</p>
                 <p></p>
             </div>
             <div class="col-2"></div>

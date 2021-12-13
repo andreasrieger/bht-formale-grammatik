@@ -224,15 +224,29 @@ const toggleStartResetButton = (state) => {
     const button = document.getElementById("startResetButton");
     if (state == "active") {
         button.classList.remove("active");
-        button.classList.replace("btn-primary", "btn-outline-danger")
+        button.classList.replace("btn-primary", "btn-outline-warning")
         button.innerText = "Reset";
     } else {
         button.classList.add("active");
-        button.classList.replace("btn-outline-danger", "btn-primary")
+        button.classList.replace("btn-outline-warning", "btn-primary")
         button.innerText = "Start";
     }
 }
 
+
+const resetOutputText = ()=>{
+    const textNodes = document.querySelectorAll(".output-text");
+    for (let i = 0, l = textNodes.length; i < l; i++) {
+        textNodes[i].innerText = "";
+    }
+};
+
+const resetActiveCard = () => {
+    const nodes = document.querySelectorAll(".alert-success");
+    for (let i = 0, l = nodes.length; i < l; i++) {
+        nodes[i].classList.remove("alert-success");
+    }
+};
 
 const checkMark = (check) => {
     const iconNode = document.createElement("i");
@@ -339,6 +353,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("startResetButton").addEventListener("click", () => {
         if (document.getElementById("startResetButton").classList.contains("active")) {
+            // start state
             eL = document.getElementById("customRange").value;
             A();
             activeRule("sRule");
@@ -348,7 +363,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log(eL)
             console.log(T)
         } else {
+            // reset state
             toggleStartResetButton("reset");
+            setTimeout(resetOutputText, 1);
+            setTimeout(resetActiveCard, 1);
             T.length = 0;
             eL = 0;
             counter = 0;

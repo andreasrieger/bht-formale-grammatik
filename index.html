@@ -29,9 +29,10 @@
     </nav>
     <div class="container h-100">
         <div class="row justify-content-center">
-            <div class="col text-center">
-                <h1>Grammar</h1>
-                <p class="lead">Some introductionary text</p>
+            <div class="col-8 text-center">
+                <h1>Grammatik</h1>
+                <p class="lead">Mit dieser Anwendung lassen sich zufällige arithmetische Ausdrücke von bestimmter Länge
+                    erzeugen und schrittweise ausgeben.</p>
             </div>
         </div>
         <div class="row gx-2 mb-2">
@@ -41,7 +42,7 @@
                         <form class="row justify-content-start align-items-center">
                             <div class="col-3">
                                 <label for="customRange" class="form-label">Länge des
-                                    Ausdrucks:</label>
+                                    Ausdrucks wählen:</label>
                             </div>
                             <div class="col-4">
                                 <input type="range" class="form-range" min="1" max="30" step="1" id="customRange">
@@ -50,7 +51,8 @@
                                 <p id="eLOutput" class="card-text text-center text-nowrap"></p>
                             </div>
                             <div class="col d-grid gap-2 mx-auto">
-                                <button id="startResetButton" class="btn btn-primary active" type="button">Start</button>
+                                <button id="startResetButton" class="btn btn-primary active"
+                                    type="button">Start</button>
                             </div>
                         </form>
                     </div>
@@ -61,8 +63,13 @@
             <div id="onSuccess" class="col">
             </div>
         </div>
-        <hr />
-        <div class="row gx-2 mb-2">
+        <hr class="mb-3" />
+        <div class="row">
+            <div class="col-12">
+                <h2 class="h4">Produktionsregeln</h2>
+            </div>
+        </div>
+        <div class="row gx-2 mb-4">
             <div class="col">
                 <div id="sRule" class="card border-primary">
                     <div class="card-body">
@@ -148,6 +155,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="h4">Ableitungen</h2>
+            </div>
+        </div>
         <div class="row gx-2 mb-2">
             <div class="col">
                 <div id="czCard" class="card border-success">
@@ -157,7 +169,7 @@
                                 <p class="card-text text-nowrap">Z => </p>
                             </div>
                             <div class="col">
-                                <p id="czText" class="card-text text-nowrap"></p>
+                                <p id="czText" class="card-text text-nowrap output-text"></p>
                             </div>
                         </div>
                     </div>
@@ -171,7 +183,7 @@
                                 <p class="card-text text-nowrap">O => </p>
                             </div>
                             <div class="col">
-                                <p id="coText" class="card-text text-nowrap"></p>
+                                <p id="coText" class="card-text text-nowrap output-text"></p>
                             </div>
                         </div>
                     </div>
@@ -185,7 +197,7 @@
                                 <p class="card-text text-nowrap">O => </p>
                             </div>
                             <div class="col">
-                                <p id="doText" class="card-text text-nowrap"></p>
+                                <p id="doText" class="card-text text-nowrap output-text"></p>
                             </div>
                         </div>
                     </div>
@@ -199,7 +211,7 @@
                                 <p class="card-text text-nowrap">Z => </p>
                             </div>
                             <div class="col">
-                                <p id="dzText" class="card-text text-nowrap"></p>
+                                <p id="dzText" class="card-text text-nowrap output-text"></p>
                             </div>
                         </div>
                     </div>
@@ -215,7 +227,7 @@
                                 <p class="card-text text-nowrap">C => </p>
                             </div>
                             <div class="col-10">
-                                <p id="cText" class="card-text text-center"></p>
+                                <p id="cText" class="card-text text-nowrap output-text text-center"></p>
                             </div>
                         </div>
                     </div>
@@ -229,29 +241,13 @@
                                 <p class="card-text text-nowrap">D => </p>
                             </div>
                             <div class="col-10">
-                                <p id="dText" class="card-text text-center"></p>
+                                <p id="dText" class="card-text text-nowrap output-text text-center"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="row g-2 mb-2">
-            <div class="col">
-                <div id="b" class="card">
-                    <div class="card-body">
-                        <div class="row justify-content-start">
-                            <div class="col-1">
-                                <p class="card-text text-nowrap">B:</p>
-                            </div>
-                            <div class="col-9">
-                                <p id="bText" class="card-text text-center"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="row mb-2">
             <div class="col">
                 <div id="aCard" class="card border-success">
@@ -261,7 +257,7 @@
                                 <p id="aKey" class="card-text text-nowrap">A => </p>
                             </div>
                             <div class="col-10">
-                                <p id="aText" class="card-text text-center overflow-auto"></p>
+                                <p id="aText" class="card-text text-nowrap output-text text-center overflow-auto"></p>
                             </div>
                         </div>
                     </div>
@@ -271,10 +267,12 @@
         <div class="row mb-2">
             <div class="d-grid gap-2 d-flex justify-content-center">
                 <div class="btn-group" role="group" aria-label="Button group">
-                    <button type="button" id="prevButton" class="btn btn-primary output-control" style="width: 10rem;" disabled>Schritt zurück</button>
-                    <button type="button" id="nextButton" class="btn btn-primary output-control" style="width: 10rem;" disabled>Schritt vor</button>
+                    <button type="button" id="prevButton" class="btn btn-primary output-control" style="width: 10rem;"
+                        disabled>Schritt zurück</button>
+                    <button type="button" id="nextButton" class="btn btn-primary output-control" style="width: 10rem;"
+                        disabled>Schritt vor</button>
                 </div>
-                
+
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle output-control" type="button" id="outputDelayed"
                         data-bs-toggle="dropdown" aria-expanded="false" disabled>
