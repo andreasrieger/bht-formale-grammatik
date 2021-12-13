@@ -45,14 +45,14 @@
                                     Ausdrucks wählen:</label>
                             </div>
                             <div class="col-4">
-                                <input type="range" class="form-range" min="1" max="30" step="1" id="customRange">
+                                <input type="range" class="form-range" min="1" max="30" step="1" id="customRange" data-bs-toggle="tooltip" data-bs-placement="top" title="Länge des Ausdrucks bestimmen.">
                             </div>
                             <div class="col-1">
                                 <p id="eLOutput" class="card-text text-center text-nowrap"></p>
                             </div>
                             <div class="col d-grid gap-2 mx-auto">
                                 <button id="startResetButton" class="btn btn-primary active"
-                                    type="button">Start</button>
+                                    type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Arithmetischen Ausdruck erzeugen und Anwendung starten.">Start</button>
                             </div>
                         </form>
                     </div>
@@ -267,21 +267,21 @@
         <div class="row mb-2">
             <div class="d-grid gap-2 d-flex justify-content-center">
                 <div class="btn-group" role="group" aria-label="Button group">
-                    <button type="button" id="prevButton" class="btn btn-primary output-control" style="width: 10rem;"
+                    <button type="button" id="prevButton" class="btn btn-primary output-control" style="width: 10rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Vorherige Ausgabe anzeigen."
                         disabled>Schritt zurück</button>
-                    <button type="button" id="nextButton" class="btn btn-primary output-control" style="width: 10rem;"
+                    <button type="button" id="nextButton" class="btn btn-primary output-control" style="width: 10rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Nächste Ausgabe anzeigen."
                         disabled>Schritt vor</button>
                 </div>
 
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle output-control" type="button" id="outputDelayed"
-                        data-bs-toggle="dropdown" aria-expanded="false" disabled>
-                        Starte Intervall...
+                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="top" title="Automatische Ausgabe aktivieren." disabled>
+                        Automatische Ausgabe starten...
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="outputDelayed">
-                        <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
-                        <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
-                        <li><a class="dropdown-item" id="4s">4 Sekunden</a></li>
+                        <li><a class="dropdown-item" id="1s" data-bs-toggle="tooltip" data-bs-placement="top" title="Ausgabeverzögerung: 1 Sekunde">1 Sekunde</a></li>
+                        <li><a class="dropdown-item" id="2s" data-bs-toggle="tooltip" data-bs-placement="top" title="Ausgabeverzögerung: 2 Sekunden">2 Sekunden</a></li>
+                        <li><a class="dropdown-item" id="4s" data-bs-toggle="tooltip" data-bs-placement="top" title="Ausgabeverzögerung: 4 Sekunden">4 Sekunden</a></li>
                     </ul>
                 </div>
             </div>

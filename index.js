@@ -226,15 +226,21 @@ const toggleStartResetButton = (state) => {
         button.classList.remove("active");
         button.classList.replace("btn-primary", "btn-outline-warning")
         button.innerText = "Reset";
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "top");
+        button.setAttribute("title", "Ausgabe unterbrechen und Anwendung zurücksetzen.");
     } else {
         button.classList.add("active");
         button.classList.replace("btn-outline-warning", "btn-primary")
         button.innerText = "Start";
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "top");
+        button.setAttribute("title", "Arithmetischen Ausdruck erzeugen und Anwendung starten.");
     }
 }
 
 
-const resetOutputText = ()=>{
+const resetOutputText = () => {
     const textNodes = document.querySelectorAll(".output-text");
     for (let i = 0, l = textNodes.length; i < l; i++) {
         textNodes[i].innerText = "";
@@ -304,9 +310,9 @@ const nextStep = (iterator, currentRule, caller) => {
         document.getElementById("aKey").innerText = "A => ";
         document.getElementById("aText").innerText = T[iterator].val;
         activeCard(currentRule.toLowerCase() + "Card", "success");
-    } 
-    
-    if (currentRule == 'A' && iterator == T.length -1) {
+    }
+
+    if (currentRule == 'A' && iterator == T.length - 1) {
         document.getElementById("aText").appendChild(checkMark(true))
     }
 
