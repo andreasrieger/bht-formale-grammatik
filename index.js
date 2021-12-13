@@ -2,7 +2,7 @@
  * Lösung zur unten gestellten Aufgabe
  * 
  * @author Andreas Rieger, s82456@bht-berlin.de
- * Date: 2021-12-08
+ * Date: 2021-12-13
  * 
  * Aufgabenstellung:  
  * 
@@ -184,16 +184,27 @@ const C = (expression) => {
 };
 
 
+/**
+ * Method to highlight the active output element.
+ * 
+ * @param {*} cardId 
+ * @param {*} colorScheme 
+ */
 const activeCard = (cardId, colorScheme) => {
     const highlightColor = (colorScheme) ? ("alert-" + colorScheme) : "alert-success";
-    const nodes = document.querySelectorAll("." + highlightColor);// grün geht nicht aus, wenn B aktiv
+    const nodes = document.querySelectorAll("." + highlightColor);
     for (let i = 0, l = nodes.length; i < l; i++) {
         if (nodes[i].id != "onSuccessOutput") nodes[i].classList.remove(highlightColor);
     }
-    // document.getElementById(cardId).classList.remove("alert-warning");
     document.getElementById(cardId).classList.add(highlightColor);
 };
 
+
+/**
+ * Method to highlight the active output element.
+ * 
+ * @param {*} ruleCard 
+ */
 const activeRule = (ruleCard) => {
     const highlightColor = "alert-primary";
     const nodes = document.querySelectorAll("." + highlightColor);
@@ -203,6 +214,10 @@ const activeRule = (ruleCard) => {
     document.getElementById(ruleCard).classList.add(highlightColor);
 }
 
+
+/**
+ * Method to disable new input during app runtime.
+ */
 const disableRange = () => {
     document.getElementById("customRange").setAttribute("disabled", "");
     const controlButtons = document.querySelectorAll(".output-control");
@@ -211,6 +226,10 @@ const disableRange = () => {
     }
 };
 
+
+/**
+ * Method to re-enable new input after app reset.
+ */
 const enableRange = () => {
     document.getElementById("customRange").removeAttribute("disabled");
     const controlButtons = document.querySelectorAll(".output-control");
@@ -220,6 +239,11 @@ const enableRange = () => {
 };
 
 
+/**
+ * Method to toggle the start/reset button
+ * 
+ * @param {*} state 
+ */
 const toggleStartResetButton = (state) => {
     const button = document.getElementById("startResetButton");
     if (state == "active") {
@@ -240,6 +264,9 @@ const toggleStartResetButton = (state) => {
 }
 
 
+/**
+ * Resetting all text output
+ */
 const resetOutputText = () => {
     const textNodes = document.querySelectorAll(".output-text");
     for (let i = 0, l = textNodes.length; i < l; i++) {
@@ -247,6 +274,10 @@ const resetOutputText = () => {
     }
 };
 
+
+/**
+ * Resetting active elements
+ */
 const resetActiveCard = () => {
     const nodes = document.querySelectorAll(".alert-success");
     for (let i = 0, l = nodes.length; i < l; i++) {
@@ -254,6 +285,12 @@ const resetActiveCard = () => {
     }
 };
 
+
+/**
+ * Creating a check mark icon
+ * @param {*} check 
+ * @returns <i> element with check mark icon
+ */
 const checkMark = (check) => {
     const iconNode = document.createElement("i");
     const icon = (check) ? "bi bi-check-lg text-success" : "bi bi-x text-danger";
@@ -262,6 +299,13 @@ const checkMark = (check) => {
 };
 
 
+/**
+ * Method to control the object output and display
+ * 
+ * @param {*} iterator 
+ * @param {*} currentRule 
+ * @param {*} caller 
+ */
 const nextStep = (iterator, currentRule, caller) => {
     if (iterator == 0) {
         document.getElementById("aKey").innerText = "A => ";
@@ -320,6 +364,11 @@ const nextStep = (iterator, currentRule, caller) => {
 };
 
 
+/**
+ * Method to start the object output and display with time delay
+ * 
+ * @param {*} delay 
+ */
 const nextStepAutoRun = (delay) => {
     for (let i = 0, l = T.length; i < l; i++) {
         setTimeout(
@@ -333,6 +382,11 @@ const nextStepAutoRun = (delay) => {
 };
 
 
+/**
+ * Method to display the generated expression in front end.
+ * 
+ * @param {*} expression 
+ */
 const onSuccessOutput = (expression) => {
     const wrapper = document.getElementById("onSuccess");
     const newMessage = document.createElement("div");
@@ -343,12 +397,10 @@ const onSuccessOutput = (expression) => {
     wrapper.appendChild(newMessage);
 }
 
+
 /**
- * Calling the A method and logging its result
+ * Init general frontend interaction options
  */
-// A()
-
-
 document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("eLOutput").innerText = document.getElementById("customRange").value;
