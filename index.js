@@ -281,7 +281,7 @@ const resetOutputText = () => {
 const resetActiveCard = () => {
     const nodes = document.querySelectorAll(".alert-success");
     for (let i = 0, l = nodes.length; i < l; i++) {
-        nodes[i].classList.remove("alert-success");
+        if (nodes[i].id != "onSuccessOutput") nodes[i].classList.remove("alert-success");
     }
 };
 
@@ -370,6 +370,8 @@ const nextStep = (iterator, currentRule, caller) => {
  * @param {*} delay 
  */
 const nextStepAutoRun = (delay) => {
+    resetOutputText();
+    resetActiveCard();
     for (let i = 0, l = T.length; i < l; i++) {
         setTimeout(
             (y) => {
@@ -399,6 +401,24 @@ const onSuccessOutput = (expression) => {
 
 
 /**
+ * This method creates a new DOM element with the given parameters.
+ * 
+ * @param {*} element 
+ * @param {*} elementClass 
+ * @param {*} elementId 
+ * @param {*} elementContent 
+ * @returns the newly created DOM element
+ */
+const newDomElement = (element, elementClass, elementId, elementContent) => {
+    const newElement = document.createElement(element);
+    newElement.setAttribute("class", elementClass);
+    if (elementId) newElement.setAttribute("id", elementId);
+    if (elementContent) newElement.innerText = elementContent;
+    return newElement;
+};
+
+
+/**
  * Init general frontend interaction options
  */
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -417,6 +437,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             activeRule("sRule");
             toggleStartResetButton("active");
             disableRange();
+            document.getElementById("prevButton").setAttribute("disabled", "");
             onSuccessOutput(T[T.length - 1].val);
             console.log(eL)
             console.log(T)
@@ -442,15 +463,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
             i--;
             console.log(T[i])
             nextStep(i, T[i].rule, T[i].caller)
-        }
+        } else document.getElementById("prevButton").setAttribute("disabled", "");
     })
 
     document.getElementById("nextButton").addEventListener("click", () => {
+        document.getElementById("nextButton").innerText = "Schritt vor";
+        if (i > -1) document.getElementById("prevButton").removeAttribute("disabled");
         if (i + 1 < T.length) {
             i++;
             console.log(T[i])
             nextStep(i, T[i].rule, T[i].caller)
         }
+        else if (i == T.length - 1) {
+            document.getElementById("nextButton").innerText = "Starte von vorn";
+        }
+        /*
+        else if (i + 1 == T.length) {
+            resetOutputText();
+            resetActiveCard();
+            i = -1;
+        }
+        */
     })
 
     document.getElementById("1s").addEventListener("click", () => {
